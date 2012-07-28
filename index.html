@@ -30,25 +30,27 @@ var svg = d3.select("body").append("svg:svg")
     .attr("width", w)
     .attr("height", h)
     .style("pointer-events", "all")
-    .on("mousemove", particle);
 
-function particle() {
-  var m = d3.svg.mouse(this);
+    function particle() {
+      console.log('particle')
+      svg.append("svg:circle")
+          .attr("cx", 10)
+          .attr("cy", 220)
+          .attr("r", 5)
+          .style("stroke", 'red')
+          .style("stroke-opacity", 1)
+        .transition()
+          .duration(2000)
+          .ease(Math.sqrt)
+          .attr("r", 10)
+          .style("stroke-opacity", 1e-6)
+          .remove();
+    }
 
-  svg.append("svg:circle")
-      .attr("cx", m[0])
-      .attr("cy", m[1])
-      .attr("r", 1e-6)
-      .style("stroke", z(++i))
-      .style("stroke-opacity", 1)
-    .transition()
-      .duration(2000)
-      .ease(Math.sqrt)
-      .attr("r", 100)
-      .style("stroke-opacity", 1e-6)
-      .remove();
-}
-
+    $(document).ready(function () {
+      $('button').click(particle)
+    });
     </script>
+  <button>Run</button>
   </body>
 </html>
