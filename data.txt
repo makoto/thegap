@@ -18,7 +18,7 @@ Cycling|4000m Individual Pursuit Men|4:19.611|4:16.977
 Cycling|4000m Team Pursuit Men|4:00.040|3:53.314
 Cycling|BMX Individual Men|36.606|36.19
 Cycling|BMX Individual Women|38.042|35.976
-Cycling|Cross-country Men|1:57:06|1:55.59
+Cycling|Cross-country Men|1:57:06|1:55:59
 Cycling|Cross-country Women|1:45:52|1:45:11
 Cycling|Individual Pursuit Women|3:30.395|3:28.321
 Cycling|Individual Road Race Men|6:23:49|6:23:49
@@ -115,6 +115,6 @@ Track & Field|50km Walk Men|3:39:27|3:37:09
 Track & Field|800m Men|1:44.70|1:44.65
 Track & Field|800m Women|1:56.07|1:54.87
 Track & Field|Marathon Men|2:07:16|2:06:32
-Track & Field|Marathon Women|2:26:44|2:26:44
-Triathlon|Triathlon Men|1:48:53|0.0756712962962963
+Track & Field|Marathon Women|2:27:06|2:26:44
+Triathlon|Triathlon Men|1:48:58|1:48:53
 Triathlon|Triathlon Women|1:59:34|1:58:27
