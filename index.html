@@ -23,6 +23,7 @@ circle {
 
 var w = 960,
     h = 500,
+    gap = 10,
     z = d3.scale.category20c(),
     i = 0;
 
@@ -36,7 +37,7 @@ var svg = d3.select("body").append("svg:svg")
     function drawLine(y, interval){
       var counter = 0;
       var drawDots = function(y){
-        counter = counter + 10 ;
+        counter = counter + gap ;
         console.log('counter', counter);
         particle(counter,y);
       }
