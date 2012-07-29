@@ -32,21 +32,25 @@ var svg = d3.select("body").append("svg:svg")
     .style("pointer-events", "all")
 
 
-    function drawLine(y){
-      for (var x=0; x < 960; x=x+5) {
-        console.log(x,y)
-        particle(x, y)
-      };
+
+    function drawLine(y, interval){
+      var counter = 0;
+      var drawDots = function(y){
+        counter = counter + 10 ;
+        console.log('counter', counter);
+        particle(counter,y);
+      }
+      
+      setInterval(function(){drawDots(y)},interval);
     }
 
+
     function drawLines(){
-      for (var y=0; y < 500; y=y+50) {
-        drawLine(y)
-      };
+        drawLine(50, 500)
+        drawLine(100, 1000)
     }
 
     function particle(x, y) {
-      console.log('particle')
       svg.append("svg:circle")
           .attr("cx", x)
           .attr("cy", y)
