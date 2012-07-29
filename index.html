@@ -20,68 +20,70 @@ circle {
   </head>
   <body>
     <script type="text/javascript">
+    $(document).ready(function () {
+      var w = 1000,
+          h = 500,
+          gap = 10,
+          counts = w / gap,
+          z = d3.scale.category20c(),
+          i = 0;
 
-var w = 1000,
-    h = 500,
-    gap = 10,
-    counts = w / gap,
-    z = d3.scale.category20c(),
-    i = 0;
 
 
+      var svg = d3.select("#track").append("svg:svg")
+          .attr("width", w)
+          .attr("height", h)
+          .style("pointer-events", "all")
 
-var svg = d3.select("body").append("svg:svg")
-    .attr("width", w)
-    .attr("height", h)
-    .style("pointer-events", "all")
+      function drawLine(y, interval){
+        var counter = 0;
+        var startTime = new Date();      
+        var id;
+        var drawDots = function(y){
+          counter = counter + gap ;
+          particle(counter,y);
+          if (counter > w) {
+            var endTime = new Date();
+            // console.log(interval, endTime - startTime)
+            window.clearInterval(id);
+          };
+        }
 
-    function drawLine(y, interval){
-      var counter = 0;
-      var startTime = new Date();      
-      var id;
-      var drawDots = function(y){
-        counter = counter + gap ;
-        particle(counter,y);
-        if (counter > w) {
-          var endTime = new Date();
-          // console.log(interval, endTime - startTime)
-          window.clearInterval(id);
-        };
+        id = setInterval(function(){drawDots(y)},interval);
+      }
+
+      function speedToInterval(speed){
+        return speed / counts * 1000;
+      }
+
+      function drawLines(){
+          // console.log(speedToInterval(1), speedToInterval(5), speedToInterval(10))
+          drawLine(50,  speedToInterval(0.1))
+          drawLine(100, speedToInterval(5))
+          drawLine(150, speedToInterval(10))
+      }
+
+      function particle(x, y) {
+        svg.append("svg:circle")
+            .attr("cx", x)
+            .attr("cy", y)
+            .attr("r", 5)
+            .style("stroke", 'red')
+            .style("stroke-opacity", 1)
+          .transition()
+            .duration(2000)
+            .ease(Math.sqrt)
+            .attr("r", 10)
+            .style("stroke-opacity", 1e-6)
+            .remove();
       }
       
-      id = setInterval(function(){drawDots(y)},interval);
-    }
-
-    function speedToInterval(speed){
-      return speed / counts * 1000;
-    }
-
-    function drawLines(){
-        // console.log(speedToInterval(1), speedToInterval(5), speedToInterval(10))
-        drawLine(50,  speedToInterval(0.1))
-        drawLine(100, speedToInterval(5))
-        drawLine(150, speedToInterval(10))
-    }
-
-    function particle(x, y) {
-      svg.append("svg:circle")
-          .attr("cx", x)
-          .attr("cy", y)
-          .attr("r", 5)
-          .style("stroke", 'red')
-          .style("stroke-opacity", 1)
-        .transition()
-          .duration(2000)
-          .ease(Math.sqrt)
-          .attr("r", 10)
-          .style("stroke-opacity", 1e-6)
-          .remove();
-    }
-
-    $(document).ready(function () {
+      
       $('button').click(drawLines)
     });
     </script>
   <button>Run</button>
+  <div id="track">
+  </div>
   </body>
 </html>
