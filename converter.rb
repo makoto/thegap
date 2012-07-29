@@ -1,7 +1,8 @@
 require 'pp'
 require 'time'
+require 'json'
 rows = File.readlines('./data.txt')
-p rows.map{|r|
+puts JSON.generate rows.map{|r|
   category, event, second, first = r.chomp!.split('|')
   # p ['1', category, event, second, first]
   raise 'omg1' if (first.match(':') && first.match(':').size) != (second.match(':') && second.match(':').size)
