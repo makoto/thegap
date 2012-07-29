@@ -31,17 +31,25 @@ var svg = d3.select("body").append("svg:svg")
     .attr("height", h)
     .style("pointer-events", "all")
 
-    function drawLine(){
-      for (var i=0; i < 960; i=i+10) {
-        particle(i)
+
+    function drawLine(y){
+      for (var x=0; x < 960; x=x+5) {
+        console.log(x,y)
+        particle(x, y)
       };
     }
 
-    function particle(x) {
+    function drawLines(){
+      for (var y=0; y < 500; y=y+50) {
+        drawLine(y)
+      };
+    }
+
+    function particle(x, y) {
       console.log('particle')
       svg.append("svg:circle")
           .attr("cx", x)
-          .attr("cy", 220)
+          .attr("cy", y)
           .attr("r", 5)
           .style("stroke", 'red')
           .style("stroke-opacity", 1)
@@ -54,7 +62,7 @@ var svg = d3.select("body").append("svg:svg")
     }
 
     $(document).ready(function () {
-      $('button').click(drawLine)
+      $('button').click(drawLines)
     });
     </script>
   <button>Run</button>
