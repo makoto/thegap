@@ -1,0 +1,176 @@
+@charset "UTF-8";
+/* CSS Document */
+
+div{
+font-family: 'Muli', sans-serif;}
+body {
+	margin:0;
+}
+h1{
+	font-size:50px;
+	padding:8px 0 8px 15px;
+	margin:0 0 10px 0;
+	/* 
+	background-image: -ms-linear-gradient(left, #1D4CAA 0%, #C438D9 50%, #EEEE26 100%);
+	background-image: -moz-linear-gradient(left, #1D4CAA 0%, #C438D9 50%, #EEEE26 100%);
+	background-image: -o-linear-gradient(left, #1D4CAA 0%, #C438D9 50%, #EEEE26 100%);
+	background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #1D4CAA), color-stop(0.5, #C438D9), color-stop(1, #EEEE26));
+	background-image: -webkit-linear-gradient(left, #1D4CAA 0%, #C438D9 50%, #EEEE26 100%);
+	background-image: linear-gradient(to right, #1D4CAA 0%, #C438D9 50%, #EEEE26 100%);*/
+	font-family: 'Coda Caption', sans-serif;
+	color: rgba(0, 168, 255, 0.5);
+    text-shadow: 3px 3px 0 rgba(255, 0, 180, 0.5);
+}
+div {
+	margin-left:22px;
+}
+a {
+	color:#508217;
+	text-decoration:none;
+}
+a:hover {
+	color:#8ab25d;
+}
+a:visited {
+	color:#8ab25d;
+}
+circle {
+  fill: none;
+  stroke-width: 1.5px;
+}
+.button {
+
+/* text */
+	text-decoration: 		none;
+	font: 					24px/1em 'Coda Caption', sans-serif;;
+	font-weight: 			bold;
+	text-shadow: 			rgba(255,255,255,.5) 0 1px 0;
+	-webkit-user-select: 	none;
+	-moz-user-select: 		none;
+	user-select: 			none;
+	
+	
+/* layout */
+	padding: 				.5em .6em .4em .3em;
+	margin: 				.5em .5em .5em .7em;
+	display: 				inline-block;
+	position: 				relative;
+	
+	-webkit-border-radius: 	8px;
+	-moz-border-radius: 	8px;
+	border-radius: 	8px;
+	
+/* effects */
+	border-top: 		1px solid rgba(255,255,255,0.8);
+	border-bottom: 		1px solid rgba(0,0,0,0.1);
+	
+	background-image: 	-webkit-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255,255,255,0) ), to( rgba(255,255,255,0.7) ));
+	background-image: 	-moz-radial-gradient(top, ellipse cover, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 100%);
+	background-image: 	gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255,255,255,0) ), to( rgba(255,255,255,0.7) ));
+
+	-webkit-transition: background .2s ease-in-out;
+	-moz-transition: 	background .2s ease-in-out;
+	transition: 		background .2s ease-in-out;
+	
+/* color */
+	color: 				hsl(0, 0%, 40%) !important;
+	background-color: 	hsl(0, 0%, 75%);
+	
+	-webkit-box-shadow: inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */ 
+						hsl(0, 0%, 60%) 0 .1em 3px, hsl(0, 0%, 45%) 0 .3em 1px, /* color border */
+						rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
+	-moz-box-shadow: 	inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */ 
+						hsl(0, 0%, 60%) 0 .1em 3px, hsl(0, 0%, 45%) 0 .3em 1px, /* color border */
+						rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
+	box-shadow:		 	inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */ 
+						hsl(0, 0%, 60%) 0 .1em 3px, hsl(0, 0%, 45%) 0 .3em 1px, /* color border */
+						rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
+}
+
+/* -------------- button (tag) -------------- */
+
+button.button {
+	border-left: none;
+	border-right: none;
+}
+button.button:hover {
+	cursor: pointer;
+}
+
+
+/* -------------- icon -------------- */
+.button:before {
+	font: 			1.2em/0 sans-serif;
+	content: 		attr(data-icon); /* gets the icon value from the custom data attribute and puts it infront of the button label */
+	margin-right: 	0.4em;
+}
+
+.button {
+	color: 				hsl(88, 70%, 30%) !important;
+	background-color: 	hsl(88, 70%, 60%);
+	-webkit-box-shadow: inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */ 
+							hsl(88, 70%, 40%) 0 .1em 3px, hsl(88, 70%, 30%) 0 .3em 1px, /* color border */
+							rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
+	-moz-box-shadow: 	inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */ 
+							hsl(88, 70%, 40%) 0 .1em 3px, hsl(88, 70%, 30%) 0 .3em 1px, /* color border */
+							rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
+	box-shadow:		 	inset rgba(255,254,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.15) 0 -0.1em .3em, /* inner shadow */ 
+							hsl(88, 70%, 40%) 0 .1em 3px, hsl(88, 70%, 30%) 0 .3em 1px, /* color border */
+							rgba(0,0,0,0.2) 0 .5em 5px; /* drop shadow */
+}
+.button:hover { 	background-color: hsl(88, 70%, 75%); }
+.button:hover {
+	background-color: 	hsl(0, 0%, 83%);
+}
+
+
+
+.button:active {
+	background-image: 	-webkit-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255,255,255,0) ), to( rgba(255,255,255,0) )), ;
+	background-image: 	-moz-gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255,255,255,0) ), to( rgba(255,255,255,0) ));
+	background-image: 	gradient(radial, 50% 0, 100, 50% 0, 0, from( rgba(255,255,255,0) ), to( rgba(255,255,255,0) ));
+
+	-webkit-box-shadow: inset rgba(255,255,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.2) 0 -0.1em .3em, /* inner shadow */ 
+							rgba(0,0,0,0.4) 0 .1em 1px, /* border */
+							rgba(0,0,0,0.2) 0 .2em 6px; /* drop shadow */
+	-moz-box-shadow: 	inset rgba(255,255,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.2) 0 -0.1em .3em, /* inner shadow */ 
+							rgba(0,0,0,0.4) 0 .1em 1px, /* border */
+							rgba(0,0,0,0.2) 0 .2em 6px; /* drop shadow */
+	box-shadow: 		inset rgba(255,255,255,0.6) 0 0.3em .3em, inset rgba(0,0,0,0.2) 0 -0.1em .3em, /* inner shadow */ 
+							rgba(0,0,0,0.4) 0 .1em 1px, /* border */
+							rgba(0,0,0,0.2) 0 .2em 6px; /* drop shadow */
+
+	-webkit-transform: 	translateY(.2em);
+	-moz-transform: 	translateY(.2em);
+	transform: 			translateY(.2em);
+}
+
+.button:focus {
+	outline: none;
+	color: rgba(254,255,255,0.9) !important;
+	text-shadow: rgba(0,0,0,0.2) 0 1px 2px;
+}
+
+.button[disabled], .button[disabled]:hover, .button.disabled, .button.disabled:hover {
+	opacity: 			.5;
+	cursor: 			default;
+	color: 				rgba(0,0,0,0.2) !important;
+	text-shadow: 		none !important;
+	background-color: 	rgba(0,0,0,0.05);
+	background-image: 	none;
+	border-top: 		none;
+
+	-webkit-box-shadow: inset rgba(255,254,255,0.4) 0 0.3em .3em, inset rgba(0,0,0,0.1) 0 -0.1em .3em, /* inner shadow */ 
+							rgba(0,0,0,0.3) 0 .1em 1px, /* border */
+							rgba(0,0,0,0.2) 0 .2em 6px; /* drop shadow */
+	-moz-box-shadow: 	inset rgba(255,254,255,0.4) 0 0.3em .3em, inset rgba(0,0,0,0.1) 0 -0.1em .3em, /* inner shadow */ 
+							rgba(0,0,0,0.3) 0 .1em 1px, /* border */
+							rgba(0,0,0,0.2) 0 .2em 6px; /* drop shadow */
+	box-shadow: 		inset rgba(255,254,255,0.4) 0 0.3em .3em, inset rgba(0,0,0,0.1) 0 -0.1em .3em, /* inner shadow */ 
+							rgba(0,0,0,0.3) 0 .1em 1px, /* border */
+							rgba(0,0,0,0.2) 0 .2em 6px; /* drop shadow */
+
+	-webkit-transform: 	translateY(5px);
+	-moz-transform: 	translateY(5px);
+	transform: 			translateY(5px);
+}
