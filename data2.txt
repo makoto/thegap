@@ -1,0 +1,122 @@
+Category,event,first,second,diff
+--------,-----,-----,------,-----
+Cycling,Individual Road Race Men,6:23:49,6:23:49,0
+Cycling,Individual Road Race Women,3:32:24,3:32:24,0
+Canoeing,K1 500m Kayak Singles (Women),1:50.673,1:50.677,0.004
+Rowing,Double Sculls Women,7:07.32,7:07.33,0.01
+Swimming,50m Freestyle Women,24.06,24.07,0.010000000000001563
+Swimming,100m Butterfly Men,50.58,50.59,0.010000000000005116
+Swimming,100m Freestyle Women,53.12,53.16,0.03999999999999915
+Track & Field,800m Men,1:44.65,1:44.70,0.05
+Swimming,400m Freestyle Women,4:03.22,4:03.29,0.07
+Track & Field,400m Women,49.62,49.69,0.07000000000000028
+Swimming,4x100m Freestyle Relay Men,3:08.24,3:08.32,0.08
+Canoeing,K1 500m Kayak Singles (Men),1:37.252,1:37.342,0.09
+Canoeing,K2 500m Kayak Pairs (Men),1:28.736,1:28.827,0.091
+Track & Field,100m Hurdles Women,12.54,12.64,0.10000000000000142
+Swimming,100m Freestyle Men,47.21,47.32,0.10999999999999943
+Swimming,200m Individual Medley Women,2:08.45,2:08.59,0.14
+Swimming,50m Freestyle Men,21.30,21.45,0.14999999999999858
+Swimming,200m Freestyle Women,1:54.82,1:54.97,0.15
+Track & Field,3000m Steeplechase Men,8:10.34,8:10.49,0.15
+Track & Field,1500m Men,3:32.94,3:33.11,0.17
+Track & Field,200m Women,21.74,21.93,0.19000000000000128
+Track & Field,100m Women,10.78,10.98,0.20000000000000107
+Track & Field,100m Men,9.69,9.89,0.20000000000000107
+Canoeing,C2 1000m Canadian Pairs (Men),3:36.365,3:36.588,0.223
+Track & Field,4x100m Relay Women,42.31,42.54,0.22999999999999687
+Swimming,100m Backstroke Women,58.96,59.19,0.22999999999999687
+Track & Field,110m Hurdles Men,12.93,13.17,0.2400000000000002
+Canoeing,C2 500m Canadian Pairs (Men),1:41.025,1:41.282,0.257
+Track & Field,4x400m Relay Women,3:18.54,3:18.82,0.28
+Swimming,100m Breaststroke Men,58.91,59.20,0.29000000000000625
+Swimming,100m Butterfly Women,56.73,57.10,0.37000000000000455
+Swimming,200m Backstroke Men,1:53.94,1:54.33,0.39
+Cycling,BMX Individual Men,36.19,36.606,0.4160000000000039
+Swimming,400m Individual Medley Women,4:29.45,4:29.89,0.44
+Rowing,Single Sculls Women,7:22.34,7:22.78,0.44
+Cycling,Team sprint Men,43.128,43.651,0.5230000000000032
+Swimming,200m Butterfly Women,2:04.18,2:04.72,0.54
+Swimming,4x100m Freestyle Relay Women,3:33.76,3:34.33,0.57
+Swimming,100m Backstroke Men,52.54,53.11,0.5700000000000003
+Swimming,400m Freestyle Men,3:41.86,3:42.44,0.58
+Swimming,4x100m Medley Relay Women,3:52.69,3:53.30,0.61
+Track & Field,200m Men,19.3,19.96,0.6600000000000001
+Swimming,200m Butterfly Men,1:52.03,1:52.70,0.67
+Swimming,1500m Freestyle Men,14:40.84,14:41.53,0.69
+Swimming,4x100m Medley Relay Men,3:29.34,3:30.04,0.7
+Track & Field,400m Hurdles Men,47.25,47.98,0.7299999999999969
+Rowing,Lightweight Double Sculls Men,6:10.99,6:11.72,0.73
+Canoeing,K4 500m Kayak Fours (Women),1:32.231,1:32.971,0.74
+Canoeing,K2 500m Kayak Pairs (Women),1:41.308,1:42.092,0.784
+Rowing,Single Sculls Men,6:59.83,7:00.63,0.8
+Canoeing,K4 1000m Kayak Fours (Men),2:55.714,2:56.593,0.879
+Track & Field,4x100m Relay Men,37.10,38.06,0.9600000000000009
+Swimming,200m Backstroke Women,2:05.24,2:06.23,0.99
+Track & Field,400m Men,43.75,44.74,0.990000000000002
+Cycling,Madison Men,7,8,1
+Sailing,RSX Windsurfer Men,52,53,1
+Sailing,RSX Windsurfer Women,39,40,1
+Canoeing,K1 1000m Kayak Singles (Men),3:26.323,3:27.342,1.019
+Track & Field,400m Hurdles Women,52.64,53.70,1.0600000000000023
+Track & Field,800m Women,1:54.87,1:56.07,1.2
+Rowing,Eights Men,5:23.89,5:25.11,1.22
+Swimming,200m Breaststroke Men,2:07.64,2:08.88,1.24
+Canoeing,C1 500m Canadian Singles (Men),1:47.140,1:48.397,1.257
+Rowing,Double Sculls Men,6:27.77,6:29.05,1.28
+Rowing,Coxless Fours Men,6:06.57,6:07.85,1.28
+Rowing,Lightweight Double Sculls Women,6:54.74,6:56.03,1.29
+Rowing,Quadruple Sculls Women,6:16.06,6:17.37,1.31
+Track & Field,5000m Women,15:41.40,15:42.74,1.34
+Track & Field,1500m Women,4:00.23,4:01.63,1.4
+Swimming,10km Marathon Women,1:59:27.7,1:59:29.2,1.5
+Swimming,100m Breaststroke Women,1:05.17,1:06.73,1.56
+Track & Field,10000m Men,27:01.17,27:02.77,1.6
+Canoeing,K1 Kayak Slalom Singles (Men),171.7,173.30,1.6000000000000227
+Swimming,4x200m Freestyle Relay Women,7:44.31,7:45.93,1.62
+Rowing,Lightweight Coxless Fours Men,5:47.76,5:49.39,1.63
+Rowing,Coxless Pairs Women,7:20.60,7:22.28,1.68
+Track & Field,10000m Women,29:54.66,29:56.34,1.68
+Canoeing,K2 1000m Kayak Pairs (Men),3:11.809,3:13.580,1.771
+Swimming,200m Breaststroke Women,2:20.22,2:22.05,1.83
+Rowing,Eights Women,6:05.34,6:07.22,1.88
+Swimming,200m Freestyle Men,1:42.96,1:44.85,1.89
+Canoeing,C1 Canadian Slalom Singles (Men),176.65,178.61,1.960000000000008
+Cycling,Points Race Men,58,60,2
+Swimming,10km Marathon Men,1:51:51.6,1:51:53.6,2
+Cycling,BMX Individual Women,35.976,38.042,2.0660000000000025
+Canoeing,C2 Canadian Slalom Pairs (Men),190.82,192.89,2.069999999999993
+Cycling,Individual Pursuit Women,3:28.321,3:30.395,2.074
+Rowing,Coxless Pairs Men,6:37.44,6:39.55,2.11
+Rowing,Quadruple Sculls Men,5:41.33,5:43.57,2.24
+Canoeing,C1 1000m Canadian Singles (Men),3:50.467,3:52.751,2.284
+Swimming,200m Individual Medley Men,1:54.23,1:56.52,2.29
+Swimming,400m Individual Medley Men,4:03.84,4:06.16,2.32
+Cycling,4000m Individual Pursuit Men,4:16.977,4:19.611,2.634
+Track & Field,4x400m Relay Men,2:55.39,2:58.03,2.64
+Sailing,49er,61,64,3
+Track & Field,5000m Men,12:57.82,13:02.80,4.98
+Sailing,Laser Radial Women,37,42,5
+Triathlon,Triathlon Men,1:48:53,1:48:58,5
+Sailing,Tornado,44,49,5
+Swimming,4x200m Freestyle Relay Men,6:58.56,7:03.70,5.14
+Swimming,800m Freestyle Women,8:14.10,8:20.23,6.13
+Cycling,4000m Team Pursuit Men,3:53.314,4:00.040,6.726
+Sailing,Laser Men,63,71,8
+Track & Field,3000m Steeplechase Women,8:58.81,9:07.41,8.6
+Sailing,Yngling Women,21,31,10
+Sailing,470 Women,43,53,10
+Cycling,Points Race Women,18,30,12
+Track & Field,20km Walk Men,1:19:01,1:19:15,14
+Canoeing,K1 Kayak Slalom Singles (Women),192.64,206.94,14.300000000000011
+Sailing,Finn Men,23,45,22
+Track & Field,Marathon Women,2:26:44,2:27:06,22
+Cycling,Individual Road Time Trial Women,34:51.72,35:16.01,24.29
+Sailing,470 Men,44,75,31
+Cycling,Individual Road Time Trial Men,1:02:11.43,1:02:44.79,33.36
+Track & Field,20km Walk Women,1:26:31,1:27:07,36
+Cycling,Cross-country Women,1:45:11,1:45:52,41
+Track & Field,Marathon Men,2:06:32,2:07:16,44
+Cycling,Cross-country Men,1:55:59,1:57:06,67
+Triathlon,Triathlon Women,1:58:27,1:59:34,67
+Track & Field,50km Walk Men,3:37:09,3:39:27,138
