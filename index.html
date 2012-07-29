@@ -24,31 +24,40 @@ circle {
 var w = 960,
     h = 500,
     gap = 10,
+    counts = w / gap,
     z = d3.scale.category20c(),
     i = 0;
+
+
 
 var svg = d3.select("body").append("svg:svg")
     .attr("width", w)
     .attr("height", h)
     .style("pointer-events", "all")
 
-
-
     function drawLine(y, interval){
       var counter = 0;
+      var id;
       var drawDots = function(y){
         counter = counter + gap ;
         console.log('counter', counter);
         particle(counter,y);
+        if (counter > w) {
+          window.clearInterval(id);
+        };
       }
       
-      setInterval(function(){drawDots(y)},interval);
+      id = setInterval(function(){drawDots(y)},interval);
     }
 
+    function speedToInterval(speed){
+      return speed / counts * 1000;
+    }
 
     function drawLines(){
-        drawLine(50, 500)
-        drawLine(100, 1000)
+        console.log(speedToInterval(1), speedToInterval(5))
+        drawLine(50, speedToInterval(1))
+        drawLine(100, speedToInterval(5))
     }
 
     function particle(x, y) {
