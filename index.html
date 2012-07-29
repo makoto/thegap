@@ -33,11 +33,30 @@ circle {
           h = 600,
           margin = 500,
           gap = 10,
+          dict = {},
           border = w - margin,
           counts = border / gap,
           z = d3.scale.category20c(),
           i = 0;
-
+      
+      var colors = [
+        '#1f77b4', 
+        '#ff7f0e', 
+        '#2ca02c', 
+        '#d62728',
+        '#9467bd', 
+        '#8c564b' ,
+        '#e377c2', 
+        '#7f7f7f', 
+        '#bcbd22', 
+        '#17becf'
+      ]
+      
+      Data.forEach(function(d){
+        if (!dict[d.category]) {
+          dict[d.category] = colors.shift()
+        };
+      })
 
 
       var svg = d3.select("#track").append("svg:svg")
@@ -51,12 +70,11 @@ circle {
         var id;
         var drawDots = function(y){
           counter = counter + gap ;
-          particle(counter,y,{});
+          particle(counter,y,{color:dict[d.category]});
           if (counter > border) {
             var endTime = new Date();
-            console.log(interval, endTime - startTime)
-            console.log(y)
-            particle(counter - 20 ,y, {color:'green', r:10});
+            console.log(interval, endTime - startTime, d.diff)
+            particle(counter - 20 ,y, {color:dict[d.category] , r:10});
             if (y == 50) {
               svg.append('text')
                 .attr('x', border + 10)
@@ -64,14 +82,14 @@ circle {
                 .text(function(){
                   return 'Gold - Silver diff(sec) : category : event : Gold time';
                 })
-                .style('stroke','green');
+                .style('stroke', 'grey');
               svg.append('text')
                 .attr('x', border + 10)
                 .attr('y',y - 12)
                 .text(function(){
                   return '------------ : -------- : ----- : -------------------';
                 })
-                .style('stroke','green');
+                .style('stroke','grey');
 
 
             };
@@ -84,8 +102,11 @@ circle {
               .text(function(){
                 return d.diff.toPrecision(5) +  ' sec : ' + d.category + ' : ' + d.event + ' : ' + d.first;
               })
-              .style('stroke','green');
+              .style('stroke',dict[d.category])
+              .style("stroke-opacity", 1);
             
+            
+          
             window.clearInterval(id);
           };
         }
@@ -114,7 +135,7 @@ circle {
             .style("stroke", color)
             .style("stroke-opacity", 1)
           .transition()
-            .duration(2000)
+            .duration(5000)
             .ease(Math.sqrt)
             .attr("r", r * 5)
             .style("stroke-opacity", 1e-6)
