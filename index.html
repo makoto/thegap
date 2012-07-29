@@ -21,7 +21,7 @@ circle {
   <body>
     <script type="text/javascript">
 
-var w = 960,
+var w = 1000,
     h = 500,
     gap = 10,
     counts = w / gap,
@@ -40,7 +40,6 @@ var svg = d3.select("body").append("svg:svg")
       var id;
       var drawDots = function(y){
         counter = counter + gap ;
-        console.log('counter', counter);
         particle(counter,y);
         if (counter > w) {
           window.clearInterval(id);
@@ -55,9 +54,10 @@ var svg = d3.select("body").append("svg:svg")
     }
 
     function drawLines(){
-        console.log(speedToInterval(1), speedToInterval(5))
-        drawLine(50, speedToInterval(1))
+        console.log(speedToInterval(1), speedToInterval(5), speedToInterval(10))
+        drawLine(50,  speedToInterval(0.1))
         drawLine(100, speedToInterval(5))
+        drawLine(150, speedToInterval(10))
     }
 
     function particle(x, y) {
