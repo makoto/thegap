@@ -37,11 +37,14 @@ var svg = d3.select("body").append("svg:svg")
 
     function drawLine(y, interval){
       var counter = 0;
+      var startTime = new Date();      
       var id;
       var drawDots = function(y){
         counter = counter + gap ;
         particle(counter,y);
         if (counter > w) {
+          var endTime = new Date();
+          // console.log(interval, endTime - startTime)
           window.clearInterval(id);
         };
       }
@@ -54,7 +57,7 @@ var svg = d3.select("body").append("svg:svg")
     }
 
     function drawLines(){
-        console.log(speedToInterval(1), speedToInterval(5), speedToInterval(10))
+        // console.log(speedToInterval(1), speedToInterval(5), speedToInterval(10))
         drawLine(50,  speedToInterval(0.1))
         drawLine(100, speedToInterval(5))
         drawLine(150, speedToInterval(10))
