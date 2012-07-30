@@ -1,10 +1,9 @@
 @charset "UTF-8";
 /* CSS Document */
 
-div{
-font-family: 'Muli', sans-serif;}
 body {
 	margin:0;
+  font-family: 'Muli', sans-serif;
 	background:#ececec;
 }
 h1{
@@ -23,17 +22,18 @@ h1{
     text-shadow: 3px 3px 0 rgba(255, 0, 180, 0.5);
 }
 div {
-	margin-left:22px;
+	padding-left:22px;
+	background:#FFF;
 }
 a {
-	color:#508217;
+	color:#FFD500;
 	text-decoration:none;
 }
 a:hover {
-	color:#8ab25d;
+	color:#FFE66B;
 }
 a:visited {
-	color:#8ab25d;
+	color:#D4C600;
 }
 circle {
   fill: none;
@@ -174,4 +174,24 @@ button.button:hover {
 	-webkit-transform: 	translateY(5px);
 	-moz-transform: 	translateY(5px);
 	transform: 			translateY(5px);
+}
+#tips {
+	color:#ffffff;
+	font-size:20px;
+	line-height:28px;
+	padding:8px 8px 8px 22px;
+/* Note: This gradient may render differently in browsers that don't support the unprefixed gradient syntax */
+/* IE10 Consumer Preview */ 
+background-image: -ms-linear-gradient(top left, #00FF00 0%, #00A3EF 100%);
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(top left, #00FF00 0%, #00A3EF 100%);
+/* Opera */ 
+background-image: -o-linear-gradient(top left, #00FF00 0%, #00A3EF 100%);
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #00FF00), color-stop(1, #00A3EF));
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(top left, #00FF00 0%, #00A3EF 100%);
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to bottom right, #00FF00 0%, #00A3EF 100%);
+>>>>>>> design
 }
