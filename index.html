@@ -53,55 +53,37 @@
         var id;
         var drawDots = function(y){
           counter = counter + gap ;
-          particle(counter,y,{color:dict[d.category]});
-          if (counter > border) {
-            var endTime = new Date();
-            console.log(interval, endTime - startTime, d.diff)
-            particle(counter - 20 ,y, {color:dict[d.category] , r:10});
-            if (y == 50) {
-              svg.append('text')
-                .attr('x', border + 10)
-                .attr('y',y - 30)
-                .text(function(){
-                  return 'Gold - Silver diff(sec) : category : event : Gold time';
-                })
-                .style('stroke', 'grey');
-              svg.append('text')
-                .attr('x', border + 10)
-                .attr('y',y - 12)
-                .text(function(){
-                  return '------------ : -------- : ----- : -------------------';
-                })
-                .style('stroke','grey');
-
-
-            };
-            if (y > 510) {
-              $('#tips').show();
-            };
-            svg.append('text')
-              .attr('x', border + 10)
-              .attr('y',y)
-              .text(function(){
-                return d.diff.toPrecision(5) +  ' sec : ' + d.category + ' : ' + d.event + ' : ' + d.first;
-              })
-              .style('stroke',dict[d.category])
-              .style("stroke-opacity", 1);
-            
-            
-          
-            window.clearInterval(id);
+          particle(counter,y,{color:dict[d.category], diff:d.diff});
+          if (y > 510) {
+            $('#tips').show();
           };
         }
-
-        id = setInterval(function(){drawDots(y)},interval);
+        drawDots(y)
       }
 
       function speedToInterval(speed){
         return speed / counts * 1000;
       }
 
+      function drawHeader(){
+        svg.append('text')
+          .attr('x', border + 10)
+          .attr('y', 15)
+          .text(function(){
+            return 'Gold - Silver diff(sec) : category : event : Gold time';
+          })
+          .style('stroke', 'grey');
+        svg.append('text')
+          .attr('x', border + 10)
+          .attr('y',30)
+          .text(function(){
+            return '------------ : -------- : ----- : -------------------';
+          })
+          .style('stroke','grey');
+      }
+
       function drawLines(){
+        drawHeader()
         for (var i=0; i < Data.length; i=i+5) {
           d = Data[i]
           drawLine(50 + (i * 5),  speedToInterval(d.diff), d);
@@ -118,11 +100,23 @@
             .style("stroke", color)
             .style("stroke-opacity", 1)
           .transition()
-            .duration(5000)
-            .ease(Math.sqrt)
-            .attr("r", r * 5)
-            .style("stroke-opacity", 1e-6)
-            .remove();
+            .duration(options.diff * 1000)
+            .attr("cx", border - 20)
+
+        svg.append('text')
+          .attr('x', border + 10)
+          .attr('y',y)
+          .text(function(){
+            var message = ''
+            // if (y % 30 == 0) {
+              message = d.diff.toPrecision(5) +  ' sec : ' + d.category + ' : ' + d.event + ' : ' + d.first;
+            // };
+            return message;
+          })
+          .style('stroke',dict[d.category])
+          .style("stroke-opacity", 1);
+
+            
       }
       
       $('#tips').hide();
