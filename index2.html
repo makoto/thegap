@@ -83,15 +83,10 @@
             .text('hello')
             .style("font-size", "8px")
       
-      
-      
-      
       d3.json("data.json", function(data) {
         Data = data
         drawChart = function(sorted){
-          console.log('drawChart')
           diffs = sorted.map(function(d){return d.diff})
-          console.log('1')
 
            x = d3.scale.linear()
               .domain([0, d3.max(diffs)])
@@ -100,7 +95,6 @@
            y = d3.scale.ordinal()
             .domain(diffs)
             .rangeBands([10, height]);
-          console.log('2')
           
           // Facts
           group = chart.selectAll(".group")
@@ -110,7 +104,6 @@
             .enter().append("g")
               .attr('class', 'group')
               .attr("transform", "translate(0,15)")
-              .call(function(){console.log('enter')})
           groupEnter.append('circle')
             .attr("cx", function(d){return x(d.diff)})
             .attr("cy", function(d){return y(d.diff)})
@@ -163,7 +156,6 @@
             .text(function(d){return d.second})
             .style("font-size", "8px")
           
-          console.log('4')
           var xAxis = d3.svg.axis()
             .scale(x)
             .orient("top")
@@ -174,24 +166,18 @@
             // .tickSubdivide(1)
           
           group.exit().remove()
-            .call(function(){console.log('exit')})
           
           chart.append("g")
             .attr("class", "x axis");
           
           d3.select(".x.axis")
             .call(xAxis);
-                    console.log('5')
         }
         drawChart(data)
-        foo = function(d){
-          console.log('foo')
-        }
         d3.selectAll('a')
           .on('click', function(d){ 
             var key = this.id;
             var sorted = Data.sort(function(a,b){return d3.ascending(a[key], b[key])});
-            console.log('clicked', key, sorted)
             drawChart(data)
         })
           
