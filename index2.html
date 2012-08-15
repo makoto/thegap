@@ -187,13 +187,23 @@
             .call(xAxis);
         }
         drawChart(data)
+        var last_selected = null;
+        var reverse = false;
         d3.selectAll('a')
           .on('click', function(d){ 
             var key = this.id;
+            if (key == last_selected) {
+              reverse = !reverse
+            }else{
+              reverse == false
+            };
             var sorted = Data.sort(function(a,b){return d3.ascending(a[key], b[key])});
+            if (reverse) {
+              sorted = sorted.reverse()
+            };
             drawChart(data)
+            last_selected = key;
         })
-          
         
       });
     </script>
