@@ -104,12 +104,17 @@
             .enter().append("g")
               .attr('class', 'group')
               .attr("transform", "translate(0,15)")
+
+          var groupUpdate = group.transition().duration(1000)
+
           groupEnter.append('circle')
             .attr("cx", function(d){return x(d.diff)})
             .attr("cy", function(d){return y(d.diff)})
             .attr("r", 5)
             .style('fill', 'red')
           
+          groupUpdate.select('circle')
+            .attr("cy", function(d){return y(d.diff)})
           
           groupEnter.append('rect')
             .attr("x", width - 360)
@@ -119,8 +124,9 @@
             .attr("rx", 2)
             .style('fill', 'red')
           
-          var groupUpdate = group.transition().duration(1000)
-
+          groupUpdate.select('rect')
+            .attr("y", function(d){return y(d.diff) - 10})
+          
           groupEnter.append('text')
             .attr('class', 'diff-text')
             .attr("x", width - 350)
@@ -129,32 +135,39 @@
             .style("font-size", "8px")
 
           groupUpdate.select('.diff-text')
-              .attr("x", width - 350)
               .attr("y", function(d){return y(d.diff)})
-
-          groupUpdate.select('rect')
-            .attr("x", width - 360)
-            .attr("y", function(d){return y(d.diff) - 10})
-
 
 
           groupEnter.append('text')
+            .attr('class', 'category-text')
+            .attr("x", width - 300)
+            .attr("y", function(d){return y(d.diff)})
+            .text(function(d){return d.category })
+            .style("font-size", "8px")
+
+          groupUpdate.select('.category-text')
+              .attr("y", function(d){return y(d.diff)})
+
+          groupEnter.append('text')
+            .attr('class', 'event-text')
             .attr("x", width - 220)
             .attr("y", function(d){return y(d.diff)})
             .text(function(d){return d.event})
             .style("font-size", "8px")
           
+          groupUpdate.select('.event-text')
+            .attr("y", function(d){return y(d.diff)})
+          
           groupEnter.append('text')
+            .attr('class', 'event-first')
             .attr("x", width - 100)
             .attr("y", function(d){return y(d.diff)})
             .text(function(d){return d.first})
             .style("font-size", "8px")
           
-          groupEnter.append('text')
-            .attr("x", width - 50)
+          groupUpdate.select('.event-first')
             .attr("y", function(d){return y(d.diff)})
-            .text(function(d){return d.second})
-            .style("font-size", "8px")
+            
           
           var xAxis = d3.svg.axis()
             .scale(x)
