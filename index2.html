@@ -13,15 +13,85 @@
       
     </div>
     <script type="text/javascript">
+      var width = 800
+        ,height = 1600
+    
+      var chart = d3.select("#chart").append("svg")
+            .attr("class", "chart")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+              .attr("transform", "translate(20,20)");
+      
+      // Header
+      chart.append('rect')
+        .attr("x", width - 360)
+        .attr("y", 0)
+        .attr("width", 350)
+        .attr("height", 15)
+        .attr("rx", 2)
+        .attr("ry", 2)
+        .style('fill', 'green')
+
+      chart
+        .append('a')
+          .attr('id', 'diff')
+          .attr('xlink:href', '#diff')
+            .append('text')
+            .attr("x", width - 350)
+            .attr("y", 10)
+            .text('Gap')
+            .style("font-size", "8px")
+
+      chart
+        .append('a')
+          .attr('id', 'category')
+          .attr('xlink:href', '#category')
+          .append('text')
+            .attr("x", width - 300)
+            .attr("y", 10)
+            .text('Category')
+            .style("font-size", "8px")
+
+      chart
+        .append('a')
+          .attr('id', 'event')
+          .attr('xlink:href', '#event')
+          .append('text')
+            .attr("x", width - 220)
+            .attr("y", 10)
+            .text('Event')
+            .style("font-size", "8px")
+
+      chart
+        .append('a')
+          .attr('id', 'first')
+          .attr('xlink:href', '#first')
+        .append('text')
+          .attr("x", width - 100)
+          .attr("y", 10)
+          .text('Gold')
+          .style("font-size", "8px")
+
+      chart
+        .append('a')
+          .attr('id', 'category')
+          .attr('xlink:href', '#category')
+          .append('text')
+            .attr("x", width - 50)
+            .attr("y", 10)
+            .text('hello')
+            .style("font-size", "8px")
+      
+      
+      
       
       d3.json("data.json", function(data) {
         Data = data
-
-        var drawChart = function(sorted){
+        drawChart = function(sorted){
+          console.log('drawChart')
           diffs = sorted.map(function(d){return d.diff})
-          console.log('diffs', diffs)
-          var width = 800
-            ,height = 1600
+          console.log('1')
 
            x = d3.scale.linear()
               .domain([0, d3.max(diffs)])
@@ -30,128 +100,70 @@
            y = d3.scale.ordinal()
             .domain(diffs)
             .rangeBands([10, height]);
-
-
-          chart = d3.select("#chart").append("svg")
-              .attr("class", "chart")
-              .attr("width", width)
-              .attr("height", height)
-              .append("g")
-                .attr("transform", "translate(20,20)");
-
-          // Header
-          chart.append('rect')
-            .attr("x", width - 360)
-            .attr("y", 0)
-            .attr("width", 350)
-            .attr("height", 15)
-            .attr("rx", 2)
-            .attr("ry", 2)
-            .style('fill', 'green')
-
-          chart
-            .append('a')
-              .attr('id', 'diff')
-              .attr('xlink:href', '#diff')
-                .append('text')
-                .attr("x", width - 350)
-                .attr("y", 10)
-                .text('Gap')
-                .style("font-size", "8px")
-
-          chart
-            .append('a')
-              .attr('id', 'category')
-              .attr('xlink:href', '#category')
-              .append('text')
-                .attr("x", width - 300)
-                .attr("y", 10)
-                .text('Category')
-                .style("font-size", "8px")
-
-          chart
-            .append('a')
-              .attr('id', 'event')
-              .attr('xlink:href', '#event')
-              .append('text')
-                .attr("x", width - 220)
-                .attr("y", 10)
-                .text('Event')
-                .style("font-size", "8px")
-
-          chart
-            .append('a')
-              .attr('id', 'first')
-              .attr('xlink:href', '#first')
-            .append('text')
-              .attr("x", width - 100)
-              .attr("y", 10)
-              .text('Gold')
-              .style("font-size", "8px")
-
-          chart
-            .append('a')
-              .attr('id', 'category')
-              .attr('xlink:href', '#category')
-              .append('text')
-                .attr("x", width - 50)
-                .attr("y", 10)
-                .text('hello')
-                .style("font-size", "8px")
-
+          console.log('2')
+          
           // Facts
           group = chart.selectAll(".group")
-            .data(sorted)
+            .data(sorted, function(d){return d.event})
+          
+          groupEnter = group
             .enter().append("g")
               .attr('class', 'group')
-              .attr("transform", "translate(0,15)");
-
-          group.append('circle')
+              .attr("transform", "translate(0,15)")
+              .call(function(){console.log('enter')})
+          groupEnter.append('circle')
             .attr("cx", function(d){return x(d.diff)})
             .attr("cy", function(d){return y(d.diff)})
             .attr("r", 5)
             .style('fill', 'red')
-
-
-          group.append('rect')
+          
+          
+          groupEnter.append('rect')
             .attr("x", width - 360)
             .attr("y", function(d){return y(d.diff) - 10})
             .attr("width", 350)
             .attr("height", 15)
             .attr("rx", 2)
             .style('fill', 'red')
+          
+          var groupUpdate = group.transition().duration(1000)
 
-          group.append('text')
+          groupEnter.append('text')
+            .attr('class', 'diff-text')
             .attr("x", width - 350)
             .attr("y", function(d){return y(d.diff)})
             .text(function(d){return d.diff.toPrecision(3) })
             .style("font-size", "8px")
 
-          group.append('text')
-            .attr("x", width - 300)
-            .attr("y", function(d){return y(d.diff)})
-            .text(function(d){return d.category})
-            .style("font-size", "8px")
+          groupUpdate.select('.diff-text')
+              .attr("x", width - 350)
+              .attr("y", function(d){return y(d.diff)})
 
-          group.append('text')
+          groupUpdate.select('rect')
+            .attr("x", width - 360)
+            .attr("y", function(d){return y(d.diff) - 10})
+
+
+
+          groupEnter.append('text')
             .attr("x", width - 220)
             .attr("y", function(d){return y(d.diff)})
             .text(function(d){return d.event})
             .style("font-size", "8px")
-
-          group.append('text')
+          
+          groupEnter.append('text')
             .attr("x", width - 100)
             .attr("y", function(d){return y(d.diff)})
             .text(function(d){return d.first})
             .style("font-size", "8px")
-
-          group.append('text')
+          
+          groupEnter.append('text')
             .attr("x", width - 50)
             .attr("y", function(d){return y(d.diff)})
             .text(function(d){return d.second})
             .style("font-size", "8px")
-
-
+          
+          console.log('4')
           var xAxis = d3.svg.axis()
             .scale(x)
             .orient("top")
@@ -160,21 +172,28 @@
             // .tickFormat(d3.format(".2f"))
             // .tickPadding(1)
             // .tickSubdivide(1)
-
+          
+          group.exit().remove()
+            .call(function(){console.log('exit')})
+          
           chart.append("g")
             .attr("class", "x axis");
-
+          
           d3.select(".x.axis")
             .call(xAxis);
-          
+                    console.log('5')
         }
-        s = [
-          {"category":"Cycling","event":"Individual Road Race Men","first":2,"second":"6:23:49","diff":1},
-          {"category":"Cycling","event":"Individual Road Race Women","first":1,"second":"3:32:24","diff":2},
-          {"category":"Canoeing","event":"K1 500m Kayak Singles (Women)","first":7,"second":"1:50.677","diff":3},
-          {"category":"Rowing","event":"Double Sculls Women","first":3,"second":"7:07.33","diff":4}]
-        s = data.sort(function(a,b){return d3.ascending(a.category, b.category)})
-        drawChart(s)
+        drawChart(data)
+        foo = function(d){
+          console.log('foo')
+        }
+        d3.selectAll('a')
+          .on('click', function(d){ 
+            var key = this.id;
+            var sorted = Data.sort(function(a,b){return d3.ascending(a[key], b[key])});
+            console.log('clicked', key, sorted)
+            drawChart(data)
+        })
           
         
       });
