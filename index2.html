@@ -86,18 +86,21 @@
       d3.json("data.json", function(data) {
         Data = data
         drawChart = function(sorted){
-          diffs = sorted.map(function(d){return d.diff})
+          var diffs = sorted.map(function(d){return d.diff})
+          var colors = sorted.map(function(d){return d.category})
 
-           x = d3.scale.linear()
+          var x = d3.scale.linear()
               .domain([0, d3.max(diffs)])
               .range([0, width - 10]);
 
-           y = d3.scale.ordinal()
+          var y = d3.scale.ordinal()
             .domain(diffs)
             .rangeBands([10, height]);
           
+          var color = d3.scale.category20().domain(colors)
+          
           // Facts
-          group = chart.selectAll(".group")
+          var group = chart.selectAll(".group")
             .data(sorted, function(d){return d.event})
           
           groupEnter = group
@@ -111,10 +114,11 @@
             .attr("cx", function(d){return x(d.diff)})
             .attr("cy", function(d){return y(d.diff)})
             .attr("r", 5)
-            .style('fill', 'red')
+            .style('fill', function(d){return color(d.category)})
           
           groupUpdate.select('circle')
             .attr("cy", function(d){return y(d.diff)})
+          
           
           groupEnter.append('rect')
             .attr("x", width - 360)
@@ -122,7 +126,7 @@
             .attr("width", 350)
             .attr("height", 15)
             .attr("rx", 2)
-            .style('fill', 'red')
+            .style('fill', function(d){return color(d.category)})
           
           groupUpdate.select('rect')
             .attr("y", function(d){return y(d.diff) - 10})
@@ -204,7 +208,6 @@
             drawChart(data)
             last_selected = key;
         })
-        
       });
     </script>
   </body>
