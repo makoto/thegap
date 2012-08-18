@@ -13,7 +13,7 @@
         "category": "Track & Field",
         "short": "ATH",
         "country": "DEU",
-        "time": "12.2 est.",
+        "time": "12.2",
         "person": "Fritz Hofmann",
         "year": "1896",
         "medal": "SILVER",
@@ -25,16 +25,6 @@
         "country": "USA",
         "time": "12.6",
         "person": "Francis Lane",
-        "year": "1896",
-        "medal": "BRONZE",
-        "event": "100m Men"
-    },
-    {
-        "category": "Track & Field",
-        "short": "ATH",
-        "country": "HUN",
-        "time": "12.6 est.",
-        "person": "Alajos Szokolyi",
         "year": "1896",
         "medal": "BRONZE",
         "event": "100m Men"
