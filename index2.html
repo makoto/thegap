@@ -66,7 +66,7 @@
       chart
         .append('a')
           .attr('id', 'first')
-          .attr('xlink:href', '#first')
+          .attr('xlink:href', '#first_sec')
         .append('text')
           .attr("x", width - 100)
           .attr("y", 10)
@@ -75,12 +75,12 @@
 
       chart
         .append('a')
-          .attr('id', 'category')
-          .attr('xlink:href', '#category')
+          .attr('id', 'ratio')
+          .attr('xlink:href', '#ratio')
           .append('text')
             .attr("x", width - 50)
             .attr("y", 10)
-            .text('hello')
+            .text('Ratio')
             .style("font-size", "8px")
       
       d3.json("data.json", function(data) {
@@ -166,10 +166,20 @@
             .attr('class', 'event-first')
             .attr("x", width - 100)
             .attr("y", function(d){return y(d.diff)})
-            .text(function(d){return d.first})
+            .text(function(d){return d.first_sec.toPrecision(6)})
             .style("font-size", "8px")
           
           groupUpdate.select('.event-first')
+            .attr("y", function(d){return y(d.diff)})
+
+          groupEnter.append('text')
+            .attr('class', 'event-ratio')
+            .attr("x", width - 60)
+            .attr("y", function(d){return y(d.diff)})
+            .text(function(d){return d.ratio.toPrecision(6)})
+            .style("font-size", "8px")
+
+          groupUpdate.select('.event-ratio')
             .attr("y", function(d){return y(d.diff)})
             
           
@@ -177,10 +187,6 @@
             .scale(x)
             .orient("top")
             .tickSize(1)   
-            // .tickValues(data)
-            // .tickFormat(d3.format(".2f"))
-            // .tickPadding(1)
-            // .tickSubdivide(1)
           
           group.exit().remove()
           
@@ -201,7 +207,10 @@
             }else{
               reverse == false
             };
-            var sorted = Data.sort(function(a,b){return d3.ascending(a[key], b[key])});
+            var sorted = data.sort(function(a,b){return d3.ascending(a[key], b[key])});
+            sorted.forEach(function(d){
+              console.log(d[key])
+            })
             if (reverse) {
               sorted = sorted.reverse()
             };
