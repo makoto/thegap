@@ -9,6 +9,12 @@
     </style>
   </head>
   <body>
+    <div id="events">
+      
+    </div>
+    <div id="chart">
+      
+    </div>
     <script type="text/javascript">
   
       var draw = function(selected){
@@ -21,9 +27,9 @@
           })
 
         players = d3.nest().key(function(d){return d.person}).entries(selected)
-        players.map(function(d){
-          console.log([d.key, d.values])
-        })
+        // players.map(function(d){
+        //   console.log([d.key, d.values])
+        // })
         
 
         var golds = years.map(function(d) {
@@ -59,7 +65,7 @@
         d3.select(".x.axis")
           .call(xAxis);
 
-
+        Years = years
         
         var group = svg.selectAll(".group")
             .data(years, function(d){return d.key});
@@ -72,12 +78,13 @@
         var groupExit = d3.transition(group.exit())
           .remove()
 
-        
         getDiff = function(d){
           return parseFloat(d.silver.time) - parseFloat(d.gold.time) 
         }
         
-        groupEnter.append('rect')
+        groupEnter.append('rect').attr('class', 'silver')
+        
+        groupUpdate.select('.silver')
           .attr("y", function(d,i){ return i * 19})
           .attr("x", function(d){return xGold(parseFloat(d.gold.time))})
           .attr("width", function(d){
@@ -87,14 +94,16 @@
           .attr("height", 12)
           .style('fill', 'grey')
 
-        groupEnter.append('rect')
+        groupEnter.append('rect').attr('class', 'gold')
+        groupUpdate.select('.gold')
           .attr("y", function(d,i){ return i * 19})
           .attr("x", 0)
           .attr("width", function(d){return xGold(parseFloat(d.gold.time))})
           .attr("height", 12)
           .style('fill', 'gold')
 
-        groupEnter.append('rect')
+        groupEnter.append('rect').attr('class', 'bronze')
+        groupUpdate.select('.bronze')
           .attr("y", function(d,i){ return i * 19})
           .attr("x", function(d){return xGold(parseFloat(d.silver.time))})
           .attr("width", function(d){
@@ -104,34 +113,57 @@
           .style('fill', 'maroon')
 
 
-
-
-        groupEnter.append("text")
+        groupEnter.append("text").attr('class', 'year')
+        groupUpdate.select('.year')
           .attr("y", function(d,i){ return (i * 19) + 7 })
           .attr("x", 440)
           .attr("dx", -3)
           .attr("dy", ".35em")
           .attr("text-anchor", "end")
           .text(function(d){return d.gold.year})
+
+        d3.selectAll('.year')
           .on('click', function(d){ 
             console.log(getDiff(d).toPrecision(3), d.gold.country, d.gold.person, d.gold.time, d.silver.country, d.silver.person, d.silver.time)
           })
         
       }
 
-      var width = 400
+      var width = 600
         ,height = 600
-
-      var svg = d3.select("body").append("svg")
+      
+      var svg = d3.select("#chart").append("svg")
           .attr("class", "svg")
           .attr("width", width + 100)
-          .attr("height", height)
-          // .append("g")
-          //   .attr("transform", "translate(5,20)");
-
+          .attr("height", height)      
       
-      d3.json("100m.json", function(data) {
-        draw(data)
+      d3.json("historical.json", function(data) {
+        Data = data
+        
+        events = d3.nest()
+          .key(function(d){return d.category})
+          .key(function(d){return d.event})
+            .entries(data)
+
+        events.forEach(function(c){
+          category = d3.select("#events").append('div')
+          category.append('h5').text(c.key)
+          c.values.forEach(function(e){
+            category.insert('a')
+              .attr('href', '#' + e.key)
+              .text(e.key)
+              .on('click', function(d){
+                var event_name = this.text;
+                var selected = data.filter(function(d){return d.event == event_name})
+                draw(selected)
+              })
+            category.insert('text')
+              .text(',')
+            
+          })
+        })
+        
+        draw(data.filter(function(d){return d.event == '100m Men'}))
       });
       
         
