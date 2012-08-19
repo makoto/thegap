@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <script type="text/javascript" src="./d3.min.js"></script>
+    <style type="text/css" media="screen">
+      .svg rect {
+        stroke: white;
+        fill: white;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+  
+
+      
+      d3.json("100m.json", function(data) {
+        Data = data;
+        years = d3.nest().key(function(d){return d.year}).entries(Data)
+          .map(function(d){
+            d.gold =   d.values.filter(function(d){return d.medal == "GOLD"})[0]
+            d.silver = d.values.filter(function(d){return d.medal == "SILVER"})[0]
+            d.bronze = d.values.filter(function(d){return d.medal == "BRONZE"})[0]
+            return d
+          })
+
+        players = d3.nest().key(function(d){return d.person}).entries(Data)
+        players.map(function(d){
+          console.log([d.key, d.values])
+        })
+        
+        var width = 400
+          ,height = 600
+          ,data = [2,4,6];
+
+        var svg = d3.select("body").append("svg")
+            .attr("class", "svg")
+            .attr("width", width + 100)
+            .attr("height", height)
+            // .append("g")
+            //   .attr("transform", "translate(5,20)");
+
+        var golds = years.map(function(d) {
+          return parseFloat(d.gold.time)
+        })
+
+        var silver = years.map(function(d) {
+          return parseFloat(d.silver.time)
+        })
+
+        var bronze = years.map(function(d) {
+          return parseFloat(d.bronze.time)
+        })
+
+        var xGold = d3.scale.linear()
+            .domain([0, d3.max(golds)])
+            .range([0, width - 10]);
+
+        var yGold = d3.scale.ordinal()
+          .domain([0, 26])
+          .rangeBands([10, height - 50]);
+
+        var xAxis = d3.svg.axis()
+          .scale(xGold)
+          .orient("top")
+          .tickSize(1)   
+
+
+
+        svg.append("g")
+          .attr("class", "x axis");
+
+        d3.select(".x.axis")
+          .call(xAxis);
+
+
+        
+        var group = svg.selectAll(".group")
+            .data(years, function(d){return d.key});
+
+        var groupEnter = group.enter().append('g')
+          .attr('class', 'group')
+
+        var groupUpdate = group.transition().duration(1000)
+
+        var groupExit = d3.transition(group.exit())
+          .remove()
+
+        
+        getDiff = function(d){
+          return parseFloat(d.silver.time) - parseFloat(d.gold.time) 
+        }
+        
+        groupEnter.append('rect')
+          .attr("y", function(d,i){ return i * 19})
+          .attr("x", function(d){return xGold(parseFloat(d.gold.time))})
+          .attr("width", function(d){
+            var diff = getDiff(d)
+            return xGold(diff) +2
+          })
+          .attr("height", 12)
+          .style('fill', 'grey')
+
+        groupEnter.append('rect')
+          .attr("y", function(d,i){ return i * 19})
+          .attr("x", 0)
+          .attr("width", function(d){return xGold(parseFloat(d.gold.time))})
+          .attr("height", 12)
+          .style('fill', 'gold')
+
+        groupEnter.append('rect')
+          .attr("y", function(d,i){ return i * 19})
+          .attr("x", function(d){return xGold(parseFloat(d.silver.time))})
+          .attr("width", function(d){
+            return xGold(parseFloat(d.bronze.time) - parseFloat(d.silver.time)) + 2
+          })
+          .attr("height", 12)
+          .style('fill', 'maroon')
+
+
+
+
+        groupEnter.append("text")
+          .attr("y", function(d,i){ return (i * 19) + 7 })
+          .attr("x", 440)
+          .attr("dx", -3)
+          .attr("dy", ".35em")
+          .attr("text-anchor", "end")
+          .text(function(d){return d.gold.year})
+          .on('click', function(d){ 
+            console.log(getDiff(d).toPrecision(3), d.gold.country, d.gold.person, d.gold.time, d.silver.country, d.silver.person, d.silver.time)
+          })
+        
+      });
+      
+        
+    </script>
+  </body>
+</html>
