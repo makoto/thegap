@@ -11,11 +11,8 @@
   <body>
     <script type="text/javascript">
   
-
-      
-      d3.json("100m.json", function(data) {
-        Data = data;
-        years = d3.nest().key(function(d){return d.year}).entries(Data)
+      var draw = function(selected){
+        years = d3.nest().key(function(d){return d.year}).entries(selected)
           .map(function(d){
             d.gold =   d.values.filter(function(d){return d.medal == "GOLD"})[0]
             d.silver = d.values.filter(function(d){return d.medal == "SILVER"})[0]
@@ -23,21 +20,11 @@
             return d
           })
 
-        players = d3.nest().key(function(d){return d.person}).entries(Data)
+        players = d3.nest().key(function(d){return d.person}).entries(selected)
         players.map(function(d){
           console.log([d.key, d.values])
         })
         
-        var width = 400
-          ,height = 600
-          ,data = [2,4,6];
-
-        var svg = d3.select("body").append("svg")
-            .attr("class", "svg")
-            .attr("width", width + 100)
-            .attr("height", height)
-            // .append("g")
-            //   .attr("transform", "translate(5,20)");
 
         var golds = years.map(function(d) {
           return parseFloat(d.gold.time)
@@ -130,6 +117,21 @@
             console.log(getDiff(d).toPrecision(3), d.gold.country, d.gold.person, d.gold.time, d.silver.country, d.silver.person, d.silver.time)
           })
         
+      }
+
+      var width = 400
+        ,height = 600
+
+      var svg = d3.select("body").append("svg")
+          .attr("class", "svg")
+          .attr("width", width + 100)
+          .attr("height", height)
+          // .append("g")
+          //   .attr("transform", "translate(5,20)");
+
+      
+      d3.json("100m.json", function(data) {
+        draw(data)
       });
       
         
