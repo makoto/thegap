@@ -16,6 +16,30 @@
       
     </div>
     <script type="text/javascript">
+      var parseTime = function(string){
+        var delimiters = string.match(':') && string.split(':').length  
+        var parsed = null;
+        switch(delimiters)
+        {
+          case 3:
+            var ary  = string.split(':')
+            var hour = parseFloat(ary[0])
+            var min  = parseFloat(ary[1])
+            var sec  = parseFloat(ary[2])
+            parsed   = (((hour * 60) + min) * 60) + sec
+            break;
+          case 2:        
+            var ary = string.split(':')
+            var min = parseFloat(ary[0])
+            var sec = parseFloat(ary[1])
+            parsed  = ( min * 60) + sec
+            break;
+          default:
+            parsed = parseFloat(string)
+        }
+        return parsed
+      }
+  
   
       var draw = function(selected){
         years = d3.nest().key(function(d){return d.year}).entries(selected)
@@ -33,15 +57,15 @@
         
 
         var golds = years.map(function(d) {
-          return parseFloat(d.gold.time)
+          return parseTime(d.gold.time)
         })
 
         var silver = years.map(function(d) {
-          return parseFloat(d.silver.time)
+          return parseTime(d.silver.time)
         })
 
         var bronze = years.map(function(d) {
-          return parseFloat(d.bronze.time)
+          return parseTime(d.bronze.time)
         })
 
         var xGold = d3.scale.linear()
@@ -78,17 +102,18 @@
         var groupExit = d3.transition(group.exit())
           .remove()
 
-        getDiff = function(d){
-          return parseFloat(d.silver.time) - parseFloat(d.gold.time) 
+        getDiff = function(d, slower, faster){
+          // console.log('getDiff', d, slower, faster)
+          return parseTime(d[slower].time) - parseTime(d[faster].time) 
         }
         
         groupEnter.append('rect').attr('class', 'silver')
         
         groupUpdate.select('.silver')
           .attr("y", function(d,i){ return i * 19})
-          .attr("x", function(d){return xGold(parseFloat(d.gold.time))})
+          .attr("x", function(d){return xGold(parseTime(d.gold.time))})
           .attr("width", function(d){
-            var diff = getDiff(d)
+            var diff = getDiff(d, 'silver', 'gold')
             return xGold(diff) +2
           })
           .attr("height", 12)
@@ -98,16 +123,16 @@
         groupUpdate.select('.gold')
           .attr("y", function(d,i){ return i * 19})
           .attr("x", 0)
-          .attr("width", function(d){return xGold(parseFloat(d.gold.time))})
+          .attr("width", function(d){return xGold(parseTime(d.gold.time))})
           .attr("height", 12)
           .style('fill', 'gold')
 
         groupEnter.append('rect').attr('class', 'bronze')
         groupUpdate.select('.bronze')
           .attr("y", function(d,i){ return i * 19})
-          .attr("x", function(d){return xGold(parseFloat(d.silver.time))})
+          .attr("x", function(d){return xGold(parseTime(d.silver.time))})
           .attr("width", function(d){
-            return xGold(parseFloat(d.bronze.time) - parseFloat(d.silver.time)) + 2
+            return xGold(parseTime(d.bronze.time) - parseTime(d.silver.time)) + 2
           })
           .attr("height", 12)
           .style('fill', 'maroon')
@@ -124,7 +149,7 @@
 
         d3.selectAll('.year')
           .on('click', function(d){ 
-            console.log(getDiff(d).toPrecision(3), d.gold.country, d.gold.person, d.gold.time, d.silver.country, d.silver.person, d.silver.time)
+            console.log(getDiff(d, 'silver', 'gold').toPrecision(3), d.gold.country, d.gold.person, d.gold.time, d.silver.country, d.silver.person, d.silver.time)
           })
         
       }
