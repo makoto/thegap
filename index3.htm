@@ -1,6 +1,7 @@
 <html>
   <head>
     <script type="text/javascript" src="./d3.min.js"></script>
+    <script type="text/javascript" src="./jquery.min.js"></script>
     <style type="text/css" media="screen">
       .svg rect {
         stroke: white;
@@ -10,6 +11,9 @@
   </head>
   <body>
     <div id="events">
+      
+    </div>
+    <div id="title">
       
     </div>
     <div id="chart">
@@ -61,6 +65,7 @@
         })
 
         var silver = years.map(function(d) {
+          console.log('silver', d)
           return parseTime(d.silver.time)
         })
 
@@ -80,8 +85,6 @@
           .scale(xGold)
           .orient("top")
           .tickSize(1)   
-
-
 
         svg.append("g")
           .attr("class", "x axis");
@@ -172,26 +175,37 @@
 
         events.forEach(function(c){
           category = d3.select("#events").append('div')
-          category.append('h5').text(c.key)
+          category.append('h5').append('a').text(c.key).attr('href', '#'+ c.key)
+          events = category.append('div').attr('class', 'events')
           c.values.forEach(function(e){
-            category.insert('a')
+            events.insert('a')
+              .attr('class', 'event')
               .attr('href', '#' + e.key)
               .text(e.key)
               .on('click', function(d){
                 var event_name = this.text;
                 var selected = data.filter(function(d){return d.event == event_name})
+                $('#title').text(event_name)
                 draw(selected)
               })
-            category.insert('text')
+            events.insert('text')
               .text(',')
             
           })
         })
+
+        var first_event = '100m Men';
+        $('.events').hide()
+        $('.events:first').show()
+        $('#title').text(first_event)
+        draw(data.filter(function(d){return d.event == first_event}))
+        $('h5 a').on('click', function(d){
+          $('.events').hide()
+          $(d.target).parent().next('.events').show()
+        })
         
-        draw(data.filter(function(d){return d.event == '100m Men'}))
       });
       
-        
     </script>
   </body>
 </html>
