@@ -55,23 +55,9 @@
           })
 
         players = d3.nest().key(function(d){return d.person}).entries(selected)
-        // players.map(function(d){
-        //   console.log([d.key, d.values])
-        // })
-        
-
         var golds = years.map(function(d) {
           return parseTime(d.gold.time)
         })
-
-        // var silvers = years.map(function(d) {
-        //   console.log('silver', d)
-        //   return parseTime(d.silver.time)
-        // })
-        // 
-        // var bronzes = years.map(function(d) {
-        //   return parseTime(d.bronze.time)
-        // })
 
         var xGold = d3.scale.linear()
             .domain([0, d3.max(golds)])
