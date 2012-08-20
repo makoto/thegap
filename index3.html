@@ -93,6 +93,7 @@
 
         getDiff = function(d, slower, faster){
           // console.log('getDiff', d, slower, faster)
+          // console.log(parseTime(d[slower].time) - parseTime(d[faster].time) )
           return parseTime(d[slower].time) - parseTime(d[faster].time) 
         }
         
@@ -124,7 +125,7 @@
         groupUpdate.select('.bronze')
           .attr("y", function(d,i){ return i * 19})
           .attr("x", function(d){
-            if (d.silver) {
+            if (d.silver && d.silver.time != 'n/a') {
               return xGold(parseTime(d.silver.time));
             }else{
               return 0;
