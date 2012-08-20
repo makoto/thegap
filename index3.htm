@@ -64,14 +64,14 @@
           return parseTime(d.gold.time)
         })
 
-        var silver = years.map(function(d) {
-          console.log('silver', d)
-          return parseTime(d.silver.time)
-        })
-
-        var bronze = years.map(function(d) {
-          return parseTime(d.bronze.time)
-        })
+        // var silvers = years.map(function(d) {
+        //   console.log('silver', d)
+        //   return parseTime(d.silver.time)
+        // })
+        // 
+        // var bronzes = years.map(function(d) {
+        //   return parseTime(d.bronze.time)
+        // })
 
         var xGold = d3.scale.linear()
             .domain([0, d3.max(golds)])
@@ -110,18 +110,7 @@
           return parseTime(d[slower].time) - parseTime(d[faster].time) 
         }
         
-        groupEnter.append('rect').attr('class', 'silver')
         
-        groupUpdate.select('.silver')
-          .attr("y", function(d,i){ return i * 19})
-          .attr("x", function(d){return xGold(parseTime(d.gold.time))})
-          .attr("width", function(d){
-            var diff = getDiff(d, 'silver', 'gold')
-            return xGold(diff) +2
-          })
-          .attr("height", 12)
-          .style('fill', 'grey')
-
         groupEnter.append('rect').attr('class', 'gold')
         groupUpdate.select('.gold')
           .attr("y", function(d,i){ return i * 19})
@@ -130,12 +119,37 @@
           .attr("height", 12)
           .style('fill', 'gold')
 
+        groupEnter.append('rect').attr('class', 'silver')
+        groupUpdate.select('.silver')
+          .attr("y", function(d,i){ return i * 19})
+          .attr("x", function(d){return xGold(parseTime(d.gold.time))})
+          .attr("width", function(d){
+            if (d.silver && d.silver.time != 'n/a') {
+              var diff = getDiff(d, 'silver', 'gold')
+              return xGold(diff) +2
+            }else{
+              return 0;
+            };
+          })
+          .attr("height", 12)
+          .style('fill', 'grey')
+
         groupEnter.append('rect').attr('class', 'bronze')
         groupUpdate.select('.bronze')
           .attr("y", function(d,i){ return i * 19})
-          .attr("x", function(d){return xGold(parseTime(d.silver.time))})
+          .attr("x", function(d){
+            if (d.silver) {
+              return xGold(parseTime(d.silver.time));
+            }else{
+              return 0;
+            };
+          })
           .attr("width", function(d){
-            return xGold(parseTime(d.bronze.time) - parseTime(d.silver.time)) + 2
+            if (d.silver && d.bronze && d.silver.time != 'n/a' && d.bronze.time != 'n/a') {
+              return xGold(parseTime(d.bronze.time) - parseTime(d.silver.time)) + 2
+            }else{
+              return 0;
+            };            
           })
           .attr("height", 12)
           .style('fill', 'maroon')
